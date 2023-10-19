@@ -1,0 +1,25 @@
+# Vim
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+
+# bundle
+packages/**/*.d.ts
+packages/**/*.js
+
+# tests
+/test
+/benchmarks/memory
+/coverage
+/.nyc_output
+/packages/graphql
+/benchmarks/memory
+build/config\.gypi
+
+.npmrc
+pnpm-lock.yaml
+
+# Serve
+public/

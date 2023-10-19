@@ -1,0 +1,31 @@
+version: '3.9'
+services:
+  database:
+    image: mariadb
+    env_file:
+      - ./api/.env
+    healthcheck:
+      test: ['CMD', '/usr/local/bin/healthcheck.sh', '--su-mysql', '--connect', '--innodb_initialized']
+      interval: 1s
+      retries: 100
+    volumes:
+      - ./db_data:/var/lib/mysql
+    ports:
+      - '3306:3306'
+
+  api:
+    depends_on:
+      database:
+        condition: service_healthy
+    build: ./api
+    env_file: ./api/.env
+    ports:
+      - 5000:5000
+
+  client:
+    depends_on:
+      - api
+    build: ./client
+    env_file: ./client/.env
+    ports:
+      - 3000:3000
